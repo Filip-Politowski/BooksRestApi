@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @RestController
 public class MockBookService implements BookService {
     List<Book> list;
+    private long currentId = 4L;
 
     public MockBookService() {
         list = new ArrayList<>();
@@ -35,4 +36,12 @@ public class MockBookService implements BookService {
                 .collect(Collectors.toList());
 
     }
+
+    @Override
+    public void addBook(Book book) {
+        book.setId(currentId++);
+        list.add(book);
+
+    }
+
 }

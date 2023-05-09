@@ -1,9 +1,7 @@
 package pl.coderslab.controller;
 
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import pl.coderslab.entity.Book;
 import pl.coderslab.service.BookService;
@@ -24,10 +22,15 @@ public class BookController {
     List<Book> getList() {
         return bookService.getBooks();
     }
+
     @RequestMapping("/book/{id}")
-    List<Book> getBook(@PathVariable long id){
+    List<Book> getBook(@PathVariable long id) {
         return bookService.getBookById(id);
     }
 
+    @PostMapping("/addBook")
+    void addBook(@RequestBody Book book) {
+        bookService.addBook(book);
+    }
 
 }
