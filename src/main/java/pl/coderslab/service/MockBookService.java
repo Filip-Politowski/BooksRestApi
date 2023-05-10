@@ -1,17 +1,19 @@
 package pl.coderslab.service;
 
 
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Book;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-@RestController
+@Service
 public class MockBookService implements BookService {
     List<Book> list;
+
+    private long currentId = 4L;
 
     public MockBookService() {
         list = new ArrayList<>();
@@ -35,4 +37,20 @@ public class MockBookService implements BookService {
                 .collect(Collectors.toList());
 
     }
+
+    @Override
+    public void add(Book book) {
+        book.setId(currentId++);
+        list.add(book);
+
+    }
+
+    @Override
+    public void updateBook(Book book) {
+
+
+
+    }
+
+
 }

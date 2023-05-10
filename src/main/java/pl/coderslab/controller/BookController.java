@@ -1,12 +1,12 @@
 package pl.coderslab.controller;
 
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 import pl.coderslab.entity.Book;
 import pl.coderslab.service.BookService;
+import pl.coderslab.service.MockBookService;
 
 
 import java.util.List;
@@ -20,14 +20,25 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @RequestMapping("/books")
+    @GetMapping("/books")
     List<Book> getList() {
         return bookService.getBooks();
     }
-    @RequestMapping("/book/{id}")
-    List<Book> getBook(@PathVariable long id){
+
+    @GetMapping("/book/{id}")
+    List<Book> getBook(@PathVariable long id) {
         return bookService.getBookById(id);
     }
 
+    @PostMapping("/addBook")
+    void addBook(@RequestBody Book book) {
+        bookService.add(book);
+
+    }
+
+    @PutMapping("/updateBook")
+    void updateBook(@RequestBody Book book) {
+        bookService.updateBook(book);
+    }
 
 }
