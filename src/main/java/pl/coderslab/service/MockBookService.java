@@ -47,9 +47,17 @@ public class MockBookService implements BookService {
 
     @Override
     public void updateBook(Book book) {
-
-
-
+        list.stream()
+                .filter(element -> element.getId().equals(book.getId()))
+                .map(element -> {
+                    element.setId( book.getId());
+                    element.setIsbn(book.getIsbn());
+                    element.setTitle(book.getTitle());
+                    element.setAuthor(book.getAuthor());
+                    element.setPublisher(book.getPublisher());
+                    element.setType(book.getType());
+                    return element;
+                }).collect(Collectors.toList());
     }
 
 
