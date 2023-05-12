@@ -60,5 +60,10 @@ public class MockBookService implements BookService {
                 }).collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteBook(long id) {
+        list.removeIf(element -> element.getId() == id);
+    }
+
 
 }
